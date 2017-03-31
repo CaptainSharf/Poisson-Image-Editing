@@ -10,5 +10,5 @@ Replace source and destination images in each of the file you are using with the
 <img src="https://github.com/CaptainSharf/Poisson-Image-Editing/blob/master/imgs/Screenshot%20(19).png" width = "800" />
 <h2>Mixed gradient cloning</h2>
 <img src = "https://github.com/CaptainSharf/Poisson-Image-Editing/blob/master/imgs/Screenshot%20(16).png" width = "800"/>
-#Texture flattening
+<h2>Texture flattening</h2>
 <img src = "https://github.com/CaptainSharf/Poisson-Image-Editing/blob/master/imgs/Screenshot%20(21).png" width = "800"/>
