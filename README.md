@@ -5,8 +5,8 @@ the merged images.Also the saliency of the composite image also gets affected.Th
 gradient of the source Image and a guidance vector field with boundary conditions.The solution to the obtained equation is a poisson equation.
 <h2>How to use</h2>
 Replace source and destination images in each of the file you are using with the required src and dest images
-## Results
-### Seamless cloning
+### Results
+#### Seamless cloning
 <img src="https://github.com/CaptainSharf/Poisson-Image-Editing/blob/master/imgs/Screenshot%20(19).png" width = "800" />
 <h2>Mixed gradient cloning</h2>
 <img src = "https://github.com/CaptainSharf/Poisson-Image-Editing/blob/master/imgs/Screenshot%20(16).png" width = "800"/>
