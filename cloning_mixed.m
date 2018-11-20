@@ -1,6 +1,8 @@
 %% Inputs 
-background_img = imread('images/nabla_f.png');
-border_img = imread('images/wall.jpg');
+background_img = imread('imgs/src-2.png');
+border_img = imread('imgs/dest-2.png');
+% background_img = imread('imgs/src-2.png');
+% border_img = imread('imgs/dest-2.png');
 %background_img = imresize(background_img,0.5);
 % border_img = imresize(border_img,0.5);
 [m, n, x] = size(background_img);
@@ -93,13 +95,14 @@ for i = 2:m-1
         if mask(i,j) == 1
             %calculate number of valid neighbours for each pixel
             neighbours=1;
+        if mask(i,j) == 1            
             % top boundary
             if mask(i-1,j) == 1
                 Coeff_matr(index_matr(i,j),index_matr(i-1,j)) = -1;
                 neighbours=neighbours+1;
             else
                 for chnl=1:3
-                    B(index_matr(i,j),chnl) = B(index_matr(i,j),chnl)+(border_img(i-1,j,chnl));
+                    B(index_matr(i,j),chnl) = B(index_matr(i,j),chnl)+(border_img(i-1+row_shift,j+col_shift,chnl));
                 end
             end
             
@@ -109,7 +112,7 @@ for i = 2:m-1
                 neighbours = neighbours+1;
             else
                  for chnl=1:3
-                    B(index_matr(i,j),chnl) = B(index_matr(i,j),chnl) + (border_img(i,j-1,chnl));
+                    B(index_matr(i,j),chnl) = B(index_matr(i,j),chnl) + (border_img(i+row_shift,j-1+col_shift,chnl));
                 end
             end
             
@@ -119,7 +122,7 @@ for i = 2:m-1
                 neighbours = neighbours+1;
             else
                 for chnl=1:3
-                    B(index_matr(i,j),chnl) = B(index_matr(i,j),chnl) + (border_img(i+1,j,chnl));
+                    B(index_matr(i,j),chnl) = B(index_matr(i,j),chnl) + (border_img(i+1+row_shift,j+col_shift,chnl));
                 end
             end
             
@@ -129,7 +132,7 @@ for i = 2:m-1
                 neighbours = neighbours+1;
             else
                 for chnl=1:3
-                    B(index_matr(i,j),chnl) = B(index_matr(i,j),chnl) + (border_img(i,j+1,chnl));
+                    B(index_matr(i,j),chnl) = B(index_matr(i,j),chnl) + (border_img(i+row_shift,j+1+col_shift,chnl));
                 end
             end
             Coeff_matr(index_matr(i,j),index_matr(i,j))=4;
@@ -138,7 +141,7 @@ for i = 2:m-1
             for dir_grad= -1:2:1
                 for chnl = 1:3
                     %y gradients
-                    num1 = border_img(i,j,chnl)-border_img(i-dir_grad,j,chnl);
+                    num1 = border_img(i+row_shift,j+col_shift,chnl)-border_img(i-dir_grad+row_shift,j+col_shift,chnl);
                     num2 = background_img(i,j,chnl) - background_img(i-dir_grad,j,chnl);
                     if abs(num1) > abs(num2)
                         B(index_matr(i,j),chnl) = B(index_matr(i,j),chnl) + num1;
@@ -146,7 +149,7 @@ for i = 2:m-1
                         B(index_matr(i,j),chnl) = B(index_matr(i,j),chnl) + num2;
                     end
                     %x gradients
-                    num1 = (border_img(i,j,chnl)-border_img(i,j-dir_grad,chnl));
+                    num1 = (border_img(i+row_shift,j+col_shift,chnl)-border_img(i+row_shift,j-dir_grad+col_shift,chnl));
                     num2 = (background_img(i,j,chnl) - background_img(i,j-dir_grad,chnl));
                     if abs(num1) > abs(num2)
                         B(index_matr(i,j),chnl) = B(index_matr(i,j),chnl) + num1;
